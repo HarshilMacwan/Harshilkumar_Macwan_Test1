@@ -1,40 +1,32 @@
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Random;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestSelenium {
-	public static void main(String[] args) throws IOException
-    {
-        Random objGenerator = new Random();
-        int randomNumber = 0;
-        for (int iCount = 0; iCount< 10; iCount++) {
-             randomNumber = objGenerator.nextInt(100);
-        }
+    public static void main(String[] args){
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\14169\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        WebDriver driver=new ChromeDriver();
+        driver.get("http://demo.guru99.com/test/login.html");
 
-            File file = new File("C:\\Users\\301044075\\Desktop\\Test1.xlsx");
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet first_sheet = workbook.createSheet("First Sheet");
+        WebElement email=driver.findElement(By.id("email"));
+        WebElement password=driver.findElement(By.id("passwd"));
+        WebElement login=driver.findElement(By.id("SubmitLogin"));
 
-        first_sheet.createRow(0).createCell(0).setCellValue("User1");
-        first_sheet.getRow(0).createCell(1).setCellValue("Pass1");
-        first_sheet.getRow(0).createCell(2).setCellValue(randomNumber);
-        first_sheet.createRow(1).createCell(0).setCellValue("User2");
-        first_sheet.getRow(1).createCell(1).setCellValue("Pass2");
-        first_sheet.getRow(1).createCell(2).setCellValue(randomNumber);
-        first_sheet.createRow(2).createCell(0).setCellValue("User3");
-        first_sheet.getRow(2).createCell(1).setCellValue("Pass3");
-        first_sheet.getRow(2).createCell(2).setCellValue(randomNumber);
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            workbook.write(fos);
-        }catch (Exception e)
+        email.sendKeys("hmacwan1516@gmail.com");
+        password.sendKeys("Pass123");
+        login.submit();
+        String title="Login Page";
+        String actualTitle="";
+
+        if(actualTitle.contentEquals(title))
         {
-            e.printStackTrace();
+            System.out.println("login failed");
+        }
+        else
+        {
+            System.out.println("successfully log in using email and password");
         }
 
     }
-
 }

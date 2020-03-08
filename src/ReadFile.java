@@ -1,53 +1,22 @@
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 
-public class ReadFile {  
-	public static void main(String []args){
-
-    try {
-        // Specify the path of file
-        File src=new File("C:\\Users\\301044075\\Desktop\\Test1.xlsx");
-
-        // load file
-        FileInputStream fis=new FileInputStream(src);
-
-        // Load workbook
-        XSSFWorkbook wb=new XSSFWorkbook(fis);
-
-        // Load sheet- Here we are loading first sheetonly
-        XSSFSheet sh1= wb.getSheetAt(0);
-
-        // getRow() specify which row we want to read.
-
-        // and getCell() specify which column to read.
-        // getStringCellValue() specify that we are reading String data.
-
-
-        System.out.println(sh1.getRow(0).getCell(0).getStringCellValue());
-
-        System.out.println(sh1.getRow(0).getCell(1).getStringCellValue());
-
-        System.out.println(sh1.getRow(0).getCell(2).getNumericCellValue());
-
-        System.out.println(sh1.getRow(1).getCell(0).getStringCellValue());
-
-        System.out.println(sh1.getRow(1).getCell(1).getStringCellValue());
-
-        System.out.println(sh1.getRow(1).getCell(2).getNumericCellValue());
-
-        System.out.println(sh1.getRow(2).getCell(0).getStringCellValue());
-
-        System.out.println(sh1.getRow(2).getCell(1).getStringCellValue());
-
-        System.out.println(sh1.getRow(2).getCell(2).getNumericCellValue());
-    } catch (Exception e) {
-
-        System.out.println(e.getMessage());
-
+public class ReadFile
+{
+    public static void main(String[] args) throws IOException {
+        FileInputStream wrkbook =new FileInputStream("C:\\\\Users\\\\301044075\\\\Desktop\\\\Test1.xlsx");
+        XSSFWorkbook page =new XSSFWorkbook(wrkbook);
+        XSSFSheet sheet=page.getSheetAt(0);
+        Row row= sheet.getRow(0);
+        Cell cell=row.getCell(0);
+        Cell cell2=row.getCell(1);
+        System.out.println(cell);
+        System.out.println(cell2);
     }
-}
 
 }
